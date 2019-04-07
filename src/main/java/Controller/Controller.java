@@ -1,54 +1,82 @@
 package Controller;
 
+import Model.Timer;
 import View.View;
 
-import static javafx.application.Platform.exit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
-
 //    Start timers and give them a Name.
-//    Stop a timer by Name.
-//    Check a timer by Name or all timers (without a Name ).
+//    Stop a Timer by Name.
+//    Check a Timer by Name or all timers (without a Name ).
 
     View view = new View();
 
     public Controller() {
-        run();
+        try {
+            run();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void run(){
+    public void run() throws InterruptedException {
 
         boolean flag = true;
 
-        while(flag){
-            view. emptyLine();
-            switch( view.userInput("Enter your command (  start / stop / check / exit  ) : ") )  {
+        List<Timer> listOfTimers = new ArrayList<>();
+        List<Thread> listOfThreads = new ArrayList<>();
+
+        while (flag) {
+            view.emptyLine();
+            switch (view.userInput("Enter your command (  start / stop / check / exit  ) : ")) {
                 case ("start"):
-                    view.print("Staaaaaaaaaaaaaaaaaaaaart");
+                    String name = view.userInput("Enter your name of Timer : ");
+                    Timer timer = new Timer(name, 1, true);
+                    listOfTimers.add(timer);
+                    Thread timerthread = new Thread(timer);
+                    listOfThreads.add(timerthread);
+                    timerthread.start();
+
                     break;
                 case ("stop"):
-                    // code block
+
+                    String timerForStop = view.userInput("Enter name of Timer for STOP : ");
+                    int index = getIndex(timerForStop, listOfTimers);
+                    listOfTimers.get(index).setFlag(false);
+
                     break;
                 case ("check"):
-                    // code block
+
+                    String timerForcheck = view.userInput("Enter name of Timer for check / or tape 'all' : ");
+                    if(timerForcheck.equals("all")){
+                        view.printTimers(listOfTimers);
+                    }else{
+                        int index2 = getIndex(timerForcheck, listOfTimers);
+                        view.printTimer(index2, listOfTimers);
+                    }
                     break;
 
                 case ("exit"):
                     flag = false;
-                    exit();
+                    System.exit(0);
                     break;
                 default:
                     // code block
             }
-
-
         }
-
-
-
     }
 
+    public int getIndex(String timerForStop, List<Timer> listOfTimers) {
 
-
+        int index = 0;
+        for (int i = 0; i < listOfTimers.size(); i++) {
+            if (listOfTimers.get(i).getName().equals(timerForStop)) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }
