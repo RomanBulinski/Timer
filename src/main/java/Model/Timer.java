@@ -1,7 +1,5 @@
 package Model;
 
-import static com.sun.deploy.config.JREInfo.clear;
-
 public class Timer implements Runnable {
 
     String name;
@@ -15,13 +13,10 @@ public class Timer implements Runnable {
         this.id = id;
         this.flag = flag;
     }
-
-
+    
     @Override
     public void run() {
         while( flag ) {
-//            clear();
-//            System.out.println( name +" : "+ counter );
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -31,7 +26,6 @@ public class Timer implements Runnable {
             }
         }
     }
-
 
     public String getName() {
         return name;
@@ -64,4 +58,5 @@ public class Timer implements Runnable {
     public void setCounter(int counter) {
         this.counter = counter;
     }
+    
 }
