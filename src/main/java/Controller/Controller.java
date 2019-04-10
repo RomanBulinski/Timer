@@ -26,20 +26,29 @@ public class Controller {
 
         boolean flag = true;
 
+        List<String> nameOfTimers = new ArrayList<>();
         List<Timer> listOfTimers = new ArrayList<>();
         List<Thread> listOfThreads = new ArrayList<>();
+        int idCounter = 1;
+
 
         while (flag) {
             view.emptyLine();
             switch (view.userInput("Enter your command (  start / stop / check / exit  ) : ")) {
                 case ("start"):
                     String name = view.userInput("Enter your name of Timer : ");
-                    Timer timer = new Timer(name, 1, true);
-                    listOfTimers.add(timer);
-                    Thread timerthread = new Thread(timer);
-                    listOfThreads.add(timerthread);
-                    timerthread.start();
-
+                    if( nameOfTimers.contains(name) ){
+                        int index = getIndex(name, listOfTimers);
+                        listOfTimers.get(index).setFlag(true);
+                    }else{
+                        nameOfTimers.add(name);
+                        Timer timer = new Timer(name, idCounter, true);
+                        listOfTimers.add(timer);
+                        Thread timerthread = new Thread(timer);
+                        listOfThreads.add(timerthread);
+                        timerthread.start();
+                        idCounter++;
+                    }
                     break;
                 case ("stop"):
 
@@ -69,8 +78,8 @@ public class Controller {
         }
     }
 
-    public int getIndex(String timerForStop, List<Timer> listOfTimers) {
 
+    public int getIndex(String timerForStop, List<Timer> listOfTimers) {
         int index = 0;
         for (int i = 0; i < listOfTimers.size(); i++) {
             if (listOfTimers.get(i).getName().equals(timerForStop)) {

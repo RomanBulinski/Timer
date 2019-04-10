@@ -7,13 +7,12 @@ public class Timer implements Runnable {
     Boolean flag = true;
     int counter = 0;
 
-
     public Timer(String name, int id, Boolean flag) {
         this.name = name;
         this.id = id;
         this.flag = flag;
     }
-    
+
     @Override
     public void run() {
         while( flag ) {

@@ -37,13 +37,16 @@ public class View {
 
     public void printTimers( List<Timer> listOfTimers ){
         listOfTimers.stream()
-                .forEach(n-> System.out.println( n.getName() +" : "+n.getCounter() + "s"));
+                .forEach(n-> System.out.println( "Name: "+ n.getName() +", ThreadId: "+n.getId()+", Seconds:"+n.getCounter()));
     }
+
+
+//    Name: TEA, ThreadId: 13, Seconds: 15
 
 
     public void printTimer ( int index, List<Timer> listOfTimers  ){
         Timer tempTimer = listOfTimers.get(index);
-        System.out.println( tempTimer.getName() +" : "+tempTimer.getCounter()+ "s");
+        System.out.println( "Name: "+ tempTimer.getName() +", ThreadId: "+tempTimer.getId()+", Seconds:"+tempTimer.getCounter());
     }
 
 
