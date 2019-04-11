@@ -8,10 +8,6 @@ import java.util.List;
 
 public class Controller {
 
-//    Start timers and give them a Name.
-//    Stop a Timer by Name.
-//    Check a Timer by Name or all timers (without a Name ).
-
     View view = new View();
 
     public Controller() {
@@ -60,11 +56,9 @@ public class Controller {
                         namesOfThreads.add(name);
                         Timer timer = getTimer(listOfTimers, name);
                         startThread(listOfThreads, name, timer);
-                        int index = getIndex(name, listOfThreads);
                     }
                 }
             }
-
             listOfThreads.stream()
                     .forEach(n->System.out.println( n.getName() + " "+n.getState() ));
 

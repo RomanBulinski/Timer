@@ -19,12 +19,6 @@ public class Timer implements Runnable {
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-
-//                throw new RuntimeException("Thread interrupted...");
-/*
-                throw new RuntimeException("Thread interrupted..."+e);
-                e.printStackTrace();
-*/
             }
     }
 
