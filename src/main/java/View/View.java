@@ -35,28 +35,39 @@ public class View {
         return command;
     }
 
-    public void printTimers( List<Timer> listOfTimers ){
-        listOfTimers.stream()
-                .forEach(n-> System.out.println( "Name: "+ n.getName() +", ThreadId: "+n.getId()+", Seconds:"+n.getCounter()));
+    public void printThreads( List<Thread> listOfThreads, List<Timer> listOfTimers){
+
+//        listOfThreads.stream()
+//                .forEach(n-> System.out.println( "Name: "+ n.getName() +", ThreadId: "+n.getId()+", Seconds:" ));
+
+        String tmpName = "";
+        int tempCounter = 0;
+        for( int i =0; i<listOfThreads.size(); i++ ){
+
+            for( int j =0; j<listOfTimers.size(); j++ ){
+                if( listOfThreads.get(i).getName().equals( listOfTimers.get(j).getName()   )  ){
+                    tmpName=listOfThreads.get(i).getName();
+                    tempCounter = listOfTimers.get(j).getCounter();
+                }
+            }
+            System.out.println( "Name: "+ tmpName +", ThreadId: "+listOfThreads.get(i).getId()+", Seconds:" + tempCounter );
+        }
     }
 
+    public void printThread( String threadForcheck , List<Thread> listOfThreads , List<Timer> listOfTimers){
+        listOfThreads.stream()
+                .filter(n-> n.getName().equals(threadForcheck))
+                .forEach(n-> System.out.print( "Name: "+ n.getName() +", ThreadId: "+n.getId()+ ", Seconds: "));
 
-//    Name: TEA, ThreadId: 13, Seconds: 15
+            int tempCounter = 0;
+            for( int j =0; j<listOfTimers.size(); j++ ){
+                if( listOfTimers.get(j).getName().equals( threadForcheck  )  ){
+                    tempCounter = listOfTimers.get(j).getCounter();
+                }
+            System.out.print( tempCounter );
+        }
 
 
-    public void printTimer ( int index, List<Timer> listOfTimers  ){
-        Timer tempTimer = listOfTimers.get(index);
-        System.out.println( "Name: "+ tempTimer.getName() +", ThreadId: "+tempTimer.getId()+", Seconds:"+tempTimer.getCounter());
     }
-
-
-
-
-
-
-    //    Start timers and give them a Name.
-//    Stop a Timer by Name.
-//    Check a Timer by Name or all timers (without a Name ).
-
 
 }
