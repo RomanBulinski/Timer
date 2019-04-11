@@ -10,7 +10,6 @@ public class Timer implements Runnable {
         this.name = name;
     }
 
-
     @Override
     public void run() {
             try {
@@ -19,12 +18,20 @@ public class Timer implements Runnable {
                     counter++;
                 }
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt(); // Here!
-                throw new RuntimeException("Thread interrupted...");
-//                throw new RuntimeException("Thread interrupted..."+e);
-//                e.printStackTrace();
+                Thread.currentThread().interrupt();
+
+//                throw new RuntimeException("Thread interrupted...");
+/*
+                throw new RuntimeException("Thread interrupted..."+e);
+                e.printStackTrace();
+*/
             }
     }
+
+
+
+
+
 
     public String getName() {
         return name;
@@ -41,13 +48,6 @@ public class Timer implements Runnable {
     public void setCounter(int counter) {
         this.counter = counter;
     }
-
-
-
-
-
-
-
 
 
 }

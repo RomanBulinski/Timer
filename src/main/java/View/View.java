@@ -50,7 +50,7 @@ public class View {
                     tempCounter = listOfTimers.get(j).getCounter();
                 }
             }
-            System.out.println( "Name: "+ tmpName +", ThreadId: "+listOfThreads.get(i).getId()+", Seconds:" + tempCounter );
+            System.out.println( "Name: "+ tmpName +", ThreadId: "+listOfThreads.get(i).getId()+", Seconds: " + tempCounter );
         }
     }
 

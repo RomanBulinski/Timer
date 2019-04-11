@@ -29,6 +29,7 @@ public class Controller {
         while (flag) {
             view.emptyLine();
             String[] userinput = (view.userInput("Enter your command (  start/stop/check/exit  ) : ")).split(" ");
+
             if (userinput.length == 1) {
                 if (userinput[0].equals("check")) {
                     view.printThreads(listOfThreads, listOfTimers);
@@ -47,19 +48,26 @@ public class Controller {
                 }
                 if (userinput[0].equals("start") ){
                     String name = userinput[1];
-                    if (namesOfThreads.contains(name)) {
+                    if ( namesOfThreads.contains(name)   ) {
                         int index = getIndex(name, listOfThreads);
-                        listOfTimers.remove(index);
-                        listOfThreads.remove(index);
-                        Timer timer = getTimer(listOfTimers, name);
-                        startThread(listOfThreads, name, timer);
+                        if ( listOfThreads.get(index).getState() == Thread.State.TERMINATED ){
+                            listOfTimers.remove(index);
+                            listOfThreads.remove(index);
+                            Timer timer = getTimer(listOfTimers, name);
+                            startThread(listOfThreads, name, timer);
+                        }
                     }else{
                         namesOfThreads.add(name);
                         Timer timer = getTimer(listOfTimers, name);
                         startThread(listOfThreads, name, timer);
+                        int index = getIndex(name, listOfThreads);
                     }
                 }
             }
+
+            listOfThreads.stream()
+                    .forEach(n->System.out.println( n.getName() + " "+n.getState() ));
+
         }
     }
 
@@ -85,4 +93,5 @@ public class Controller {
         }
         return index;
     }
+
 }
