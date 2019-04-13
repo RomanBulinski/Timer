@@ -6,25 +6,24 @@ public class Timer implements Runnable {
     private int counter = 0;
     private boolean flag = true;
 
-    public Timer(String name ) {
+    public Timer(String name) {
         this.name = name;
     }
 
     @Override
     public void run() {
-            try {
-                while( flag ){
-                    Thread.sleep(1000);
-                    counter++;
+        try {
+            while (flag) {
+                Thread.sleep(1000);
+                counter++;
+                if (Thread.interrupted()) {
+                    break;
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
-
-
-
-
 
 
     public String getName() {

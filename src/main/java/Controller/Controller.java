@@ -30,29 +30,29 @@ public class Controller {
                 if (userinput[0].equals("check")) {
                     view.printThreads(listOfThreads, listOfTimers);
                 }
-                if (userinput[0].equals( "exit")) {
+                if (userinput[0].equals("exit")) {
                     System.exit(0);
                 }
             }
             if (userinput.length == 2) {
-                if (userinput[0].equals( "check")) {
-                    view.printThread( userinput[1] ,listOfThreads, listOfTimers);
+                if (userinput[0].equals("check")) {
+                    view.printThread(userinput[1], listOfThreads, listOfTimers);
                 }
                 if (userinput[0].equals("stop")) {
                     int index = getIndex(userinput[1], listOfThreads);
                     listOfThreads.get(index).interrupt();
                 }
-                if (userinput[0].equals("start") ){
+                if (userinput[0].equals("start")) {
                     String name = userinput[1];
-                    if ( namesOfThreads.contains(name)   ) {
+                    if (namesOfThreads.contains(name)) {
                         int index = getIndex(name, listOfThreads);
-                        if ( listOfThreads.get(index).getState() == Thread.State.TERMINATED ){
+                        if (listOfThreads.get(index).getState() == Thread.State.TERMINATED) {
                             listOfTimers.remove(index);
                             listOfThreads.remove(index);
                             Timer timer = getTimer(listOfTimers, name);
                             startThread(listOfThreads, name, timer);
                         }
-                    }else{
+                    } else {
                         namesOfThreads.add(name);
                         Timer timer = getTimer(listOfTimers, name);
                         startThread(listOfThreads, name, timer);
@@ -60,7 +60,7 @@ public class Controller {
                 }
             }
             listOfThreads.stream()
-                    .forEach(n->System.out.println( n.getName() + " "+n.getState() ));
+                    .forEach(n -> System.out.println(n.getName() + " " + n.getState()));
 
         }
     }

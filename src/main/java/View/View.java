@@ -9,17 +9,17 @@ import java.util.List;
 
 public class View {
 
-    public void emptyLine(){
+    public void emptyLine() {
         System.out.println();
     }
 
-    public void print(String string){
-        System.out.println( string );
+    public void print(String string) {
+        System.out.println(string);
     }
 
-    public String userInput( String string ){
+    public String userInput(String string) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        print( string );
+        print(string);
         String command = null;
         try {
             command = reader.readLine();
@@ -29,34 +29,34 @@ public class View {
         return command;
     }
 
-    public void printThreads( List<Thread> listOfThreads, List<Timer> listOfTimers){
+    public void printThreads(List<Thread> listOfThreads, List<Timer> listOfTimers) {
 //        listOfThreads.stream()
 //                .forEach(n-> System.out.println( "Name: "+ n.getName() +", ThreadId: "+n.getId()+", Seconds:" ));
         String tmpName = "";
         int tempCounter = 0;
-        for( int i =0; i<listOfThreads.size(); i++ ){
-            for( int j =0; j<listOfTimers.size(); j++ ){
-                if( listOfThreads.get(i).getName().equals( listOfTimers.get(j).getName()   )  ){
+        for (int i = 0; i < listOfThreads.size(); i++) {
+            for (int j = 0; j < listOfTimers.size(); j++) {
+                if (listOfThreads.get(i).getName().equals(listOfTimers.get(j).getName())) {
                     tmpName = listOfThreads.get(i).getName();
                     tempCounter = listOfTimers.get(j).getCounter();
                 }
             }
-            System.out.println( "Name: "+ tmpName +", ThreadId: "+listOfThreads.get(i).getId()+", Seconds: " + tempCounter );
+            System.out.println("Name: " + tmpName + ", ThreadId: " + listOfThreads.get(i).getId() + ", Seconds: " + tempCounter);
         }
     }
 
-    public void printThread( String threadForcheck , List<Thread> listOfThreads , List<Timer> listOfTimers){
+    public void printThread(String threadForcheck, List<Thread> listOfThreads, List<Timer> listOfTimers) {
         listOfThreads.stream()
-                .filter(n-> n.getName().equals(threadForcheck))
-                .forEach(n-> System.out.print( "Name: "+ n.getName() +", ThreadId: "+n.getId()+ ", Seconds: "));
+                .filter(n -> n.getName().equals(threadForcheck))
+                .forEach(n -> System.out.print("Name: " + n.getName() + ", ThreadId: " + n.getId() + ", Seconds: "));
 
-            int tempCounter = 0;
-            for( int j =0; j<listOfTimers.size(); j++ ){
-                if( listOfTimers.get(j).getName().equals( threadForcheck  )  ){
-                    tempCounter = listOfTimers.get(j).getCounter();
-                }
+        int tempCounter = 0;
+        for (int j = 0; j < listOfTimers.size(); j++) {
+            if (listOfTimers.get(j).getName().equals(threadForcheck)) {
+                tempCounter = listOfTimers.get(j).getCounter();
             }
-        System.out.println( tempCounter );
+        }
+        System.out.println(tempCounter);
     }
 
 }
